@@ -1,0 +1,41 @@
+import time
+import tinytuya
+class Outlet:
+
+
+    def __init__(self,key,ip,local_key):
+        self.key=key
+        self.ip=ip
+        self.local_key=local_key
+    def status(self):
+        d=tinytuya.OutletDevice(self.key,self.ip,self.local_key)
+        d.set_version(3.3)
+        data=d.status()
+        return data["dps"]["1"]
+    def turn_on(self):
+        d = tinytuya.OutletDevice(self.key, self.ip, self.local_key)
+        d.set_version(3.3)
+        d.turn_on()
+    def turn_off(self):
+        d = tinytuya.OutletDevice(self.key, self.ip, self.local_key)
+        d.set_version(3.3)
+        d.turn_off()
+
+
+
+
+t=Outlet("bf9616a76586eba918hgs2","10.0.1.31","d1c5d8102db020f8")
+t.turn_off()
+print(t.status())
+
+# #d=tinytuya.OutletDevice("bf9616a76586eba918hgs2","10.0.1.31","d1c5d8102db020f8")
+# d.set_version(3.3)
+# data=d.status()
+# print(data)
+#
+# d.turn_off()
+# data=d.status()
+# print(data["dps"]["1"])
+
+
+
